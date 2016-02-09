@@ -34,6 +34,7 @@ var App = React.createClass({
           setTimeout(function() {
             $('#search-form').show();
             $('#modal-background').remove();
+            $('#search-text').focus();
           }, 2000)
         } else {
           $('#modal').text("Something went wrong. Please refresh the page and try again.");

@@ -2,6 +2,10 @@
   margin-top: 20px;
 }
 
+#intro-text {
+  text-align: center;
+}
+
 #modal-background {
   position: absolute;
   top: 0;

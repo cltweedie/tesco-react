@@ -9,7 +9,7 @@ window.SearchForm = React.createClass({
     return (
       <form id="search-form" className="form-inline col-md-5 col-md-offset-3" onSubmit={this.handleSubmit}>
         <div className="form-group">
-          <input type="text" ref="searchTerm" className="form-control" placeholder="Enter a product to search..." />
+          <input id="search-text" type="text" ref="searchTerm" className="form-control" placeholder="Enter a product to search..." />
           <button className="btn btn-primary" >Search</button>
         </div>
       </form>
