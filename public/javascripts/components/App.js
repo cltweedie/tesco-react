@@ -6,7 +6,7 @@ var App = React.createClass({
     this.setState({searchTerm: searchTerm})
     var _this = this;
     $.ajax({
-      url: 'https://secure.techfortesco.com/tescolabsapi/restservice.aspx?command=PRODUCTSEARCH&JSONP=callback&searchtext=' + searchTerm + '&page=1&sessionkey=YIRPrBXPleU9APsbfzdpmUGJC5U6QdR9Uy5M2YVYPgMEf5NkFP',
+      url: 'https://secure.techfortesco.com/tescolabsapi/restservice.aspx?command=PRODUCTSEARCH&JSONP=callback&searchtext=' + searchTerm + '&page=1&sessionkey=29Pb2jdxd5Tsb724YzzHGQVN3fJanikJA9MN6sghsvL7ohBg1q',
       type: "GET",
       dataType: "jsonp",
       jsonpCallback: 'callback',
@@ -17,32 +17,47 @@ var App = React.createClass({
     });
   },
   render: function() {
-    var resultsMarkup = this.state.results.map(function(result) {
-      return (
-        <section className="col-md-3" key={result['BaseProductId']}>
-          <div className="panel panel-default">
-            <div className="panel-heading">
-              <a href={"http://www.tesco.com/groceries/product/details/?id=" + result['ProductId']}>{result['Name']}</a>
-            </div>
-            <div className="panel-body">
-              <img className="col-md-6" src={result['ImagePath']} />
-              <div className="col-md-6" >
-                <div className="price">
-                £{result['Price'].toFixed(2)}
-                <a className="buy-link" href={"http://www.tesco.com/groceries/product/details/?id=" + result['ProductId']}>Buy</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      )
-    });
     return (
       <div>
         <SearchForm getResults={this.getResults}/>
-        <div className="col-md-12">{resultsMarkup}</div>
+        <div className="col-md-12">
+          <ResultsSection results={this.state.results} />
+        </div>
       </div>
     )
+  }
+});
+
+var ResultsSection = React.createClass({
+  render: function() {
+    console.log(this.props.results);
+    if (this.props.results.length > 0) {
+      var resultsMarkup = this.props.results.map(function(result) {
+        return (
+          <section className="col-md-3" key={result['BaseProductId']}>
+            <div className="panel panel-default">
+              <div className="panel-heading">
+                <a href={"http://www.tesco.com/groceries/product/details/?id=" + result['ProductId']}>{result['Name']}</a>
+              </div>
+              <div className="panel-body">
+                <img className="col-md-6" src={result['ImagePath']} />
+                <div className="col-md-6" >
+                  <div className="price">
+                  £{result['Price'].toFixed(2)}
+                  <a className="buy-link" href={"http://www.tesco.com/groceries/product/details/?id=" + result['ProductId']}>Buy</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        )
+      });
+      return (
+        <div>{resultsMarkup}</div>
+      )
+    } else {
+      return (<div></div>)
+    }
   }
 });
 
