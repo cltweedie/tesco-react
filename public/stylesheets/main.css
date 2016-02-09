@@ -100,3 +100,11 @@
 #search-form {
   display: none;
 }
+
+#tesco {
+  font-family: 'Montserrat', sans-serif;
+  color: #EC1A2C;
+  font-size: 1.25em;
+  font-weight: bold;
+  border-bottom: 4px #00539F dashed;
+}
