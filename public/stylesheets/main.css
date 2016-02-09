@@ -1,0 +1,66 @@
+#app {
+  margin-top: 20px;
+}
+
+.page-header {
+  text-align: center;
+  border-bottom: none;
+}
+
+#react-logo {
+  width: 200px;
+}
+
+#powered-by-text {
+  position: relative;
+  z-index: 1;
+  margin-top: 30px;
+  margin-bottom: -25px;
+}
+
+.panel {
+  min-height: 200px;
+}
+
+.panel-heading a {
+  color: black;
+}
+
+.panel-default > .panel-heading {
+  color: white;
+  font-size: 1em;
+}
+
+.form-inline {
+  margin-top: -30px;
+  margin-bottom: 60px;
+  clear: both;
+}
+
+.form-inline input[type='text'] {
+  width: 300px;
+}
+
+.btn-primary {
+  background-color: #00539F;
+}
+
+.price {
+  margin-top: 10px;
+  text-align: center;
+  color: white;
+  background-color: #00539F;
+  min-height: 50px;
+  font-size: 1.25em;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.buy-link {
+  display: block;
+  background-color: #EC1A2C;
+  color: white;
+  width: 100%;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
