@@ -1,6 +1,6 @@
 var App = React.createClass({
   getInitialState: function() {
-    return { results: [], sessionKey: "29Pb2jdxd5Tsb724YzzHGQVN3fJanikJA9MN6sghsvL7ohBg1q" };
+    return { results: [], sessionKey: "" };
   },
   getResults: function(searchTerm) {
     this.setState({searchTerm: searchTerm})
