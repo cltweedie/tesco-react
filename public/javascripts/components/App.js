@@ -1,12 +1,12 @@
 var App = React.createClass({
   getInitialState: function() {
-    return { results: [] };
+    return { results: [], sessionKey: "29Pb2jdxd5Tsb724YzzHGQVN3fJanikJA9MN6sghsvL7ohBg1q" };
   },
   getResults: function(searchTerm) {
     this.setState({searchTerm: searchTerm})
     var _this = this;
     $.ajax({
-      url: 'https://secure.techfortesco.com/tescolabsapi/restservice.aspx?command=PRODUCTSEARCH&JSONP=callback&searchtext=' + searchTerm + '&page=1&sessionkey=29Pb2jdxd5Tsb724YzzHGQVN3fJanikJA9MN6sghsvL7ohBg1q',
+      url: 'https://secure.techfortesco.com/tescolabsapi/restservice.aspx?command=PRODUCTSEARCH&JSONP=callback&searchtext=' + searchTerm + '&page=1&sessionkey=' + this.state.sessionKey,
       type: "GET",
       dataType: "jsonp",
       jsonpCallback: 'callback',
@@ -16,74 +16,40 @@ var App = React.createClass({
       }
     });
   },
+  login: function(username, password) {
+    $('#app').append('<div id="modal-background"></div>');
+    $('#modal-background').append('<div id="modal"><p>Please wait, logging in to Tesco.com...</p></div>');
+    $('#modal').append('<img id="loadingbar" src="images/loadingbar.gif" />');
+    var _this = this;
+    $.ajax({
+      url: 'https://secure.techfortesco.com/tescolabsapi/restservice.aspx?command=LOGIN&JSONP=callback&email=' + username + ' &password=' + password + '&developerkey=l5IpiptrB7p8M6OA9Wob&applicationkey=2D4F65B59286C8272200',
+      type: "GET",
+      dataType: "jsonp",
+      jsonpCallback: 'callback',
+      success: function(data) {
+        if (data['StatusCode'] == 0) {
+          _this.setState({ sessionKey: data['SessionKey'] });
+          console.log(data['SessionKey']);
+          $('#modal').text("Thanks, you've logged in successfully!")
+          setTimeout(function() {
+            $('#search-form').show();
+            $('#modal-background').remove();
+          }, 2000)
+        } else {
+          $('#modal').text("Something went wrong. Please refresh the page and try again.");
+        }
+      }
+    });
+  },
   render: function() {
     return (
       <div>
+        <LoginBox login={this.login} />
         <SearchForm getResults={this.getResults}/>
         <div className="col-md-12">
           <ResultsSection results={this.state.results} />
         </div>
       </div>
-    )
-  }
-});
-
-var SearchForm = React.createClass({
-  handleSubmit: function(e) {
-    e.preventDefault();
-    var searchTerm = ReactDOM.findDOMNode(this.refs.searchTerm);
-    this.props.getResults(searchTerm.value);
-    searchTerm.value = '';
-  },
-  render: function() {
-    return (
-      <form className="form-inline col-md-5 col-md-offset-3" onSubmit={this.handleSubmit}>
-        <div className="form-group">
-          <input type="text" ref="searchTerm" className="form-control" />
-          <button className="btn btn-primary" >Search</button>
-        </div>
-      </form>
-    )
-  }
-});
-
-var ResultsSection = React.createClass({
-  render: function() {
-    if (this.props.results.length > 0) {
-      var resultsMarkup = this.props.results.map(function(result) {
-        return (
-          <ResultBox result={result} />
-        )
-      });
-      return (
-        <div>{resultsMarkup}</div>
-      )
-    } else {
-      return (<div></div>)
-    }
-  }
-});
-
-var ResultBox = React.createClass({
-  render: function() {
-    var result = this.props.result;
-    return (
-      <section className="col-md-3" key={result['BaseProductId']}>
-        <div className="panel panel-default">
-          <div className="panel-heading">
-            <a href={"http://www.tesco.com/groceries/product/details/?id=" + result['ProductId']}>{result['Name']}</a>
-          </div>
-          <div className="panel-body">
-            <img className="col-md-6" src={result['ImagePath']} />
-            <div className="col-md-6" >
-              <div className="price">
-              £{result['Price'].toFixed(2)}
-              <a className="buy-link" href={"http://www.tesco.com/groceries/product/details/?id=" + result['ProductId']}>Buy</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
     )
   }
 });

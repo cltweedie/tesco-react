@@ -2,6 +2,34 @@
   margin-top: 20px;
 }
 
+#modal-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.8);
+}
+
+#modal {
+  position: absolute;
+  top: 100px;
+  left: 30%;
+  right: 30%;
+  background-color: white;
+  border: solid black 1px;
+  font-size: 1.5em;
+  text-align: center;
+  height: 200px;
+  padding-top: 50px;
+  border-radius: 5px;
+}
+
+#loadingbar {
+  clear: both;
+  margin-top: 20px;
+}
+
 .page-header {
   text-align: center;
   border-bottom: none;
@@ -63,4 +91,8 @@
   width: 100%;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
+}
+
+#search-form {
+  display: none;
 }
