@@ -2,7 +2,7 @@ window.LoginBox = React.createClass({
   render: function() {
     return (
       <div id="login-form">
-        <p id="intro-text" className="col-md-10">Please login using Tesco.com email address and password...</p>
+        <p id="intro-text" className="col-md-10">Please login to Tesco.com...</p>
         <form onSubmit={this.handleSubmit} className="form-inline col-md-offset-2">
           <input type="text" ref="username" className="form-control" placeholder="Email"/>
           <input type="password" ref="password" className="form-control" placeholder="Password"/>

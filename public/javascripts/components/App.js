@@ -5,12 +5,18 @@ var App = React.createClass({
   getResults: function(searchTerm) {
     this.setState({searchTerm: searchTerm})
     var _this = this;
+    var now = new Date();
+    var n = now.getTime();
     $.ajax({
       url: 'https://secure.techfortesco.com/tescolabsapi/restservice.aspx?command=PRODUCTSEARCH&JSONP=callback&searchtext=' + searchTerm + '&page=1&sessionkey=' + this.state.sessionKey,
       type: "GET",
       dataType: "jsonp",
       jsonpCallback: 'callback',
       success: function(data) {
+        var then = new Date();
+        var t = then.getTime();
+        var seconds = (t - n) / 1000;
+        console.log("Search took: " + seconds + " seconds.")
         _this.setState({ results: data['Products'] });
         console.log(data['Products']);
       }
