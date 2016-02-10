@@ -3,9 +3,9 @@ window.LoginBox = React.createClass({
     return (
       <div id="login-form">
         <p id="intro-text" className="col-md-10">Please login to Tesco.com...</p>
-        <form onSubmit={this.handleSubmit} className="form-inline col-md-offset-2">
-          <input type="text" ref="username" className="form-control" placeholder="Email"/>
-          <input type="password" ref="password" className="form-control" placeholder="Password"/>
+        <form onSubmit={this.handleSubmit} className="form-inline col-md-offset-3">
+          <input id="email-input" type="text" ref="username" className="form-control" placeholder="Email"/>
+          <input id="password-input" type="password" ref="password" className="form-control" placeholder="Password"/>
           <button className="btn btn-primary">Log In</button>
         </form>
       </div>

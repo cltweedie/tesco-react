@@ -6,6 +6,14 @@
   text-align: center;
 }
 
+#password-input {
+  margin-left: -1px;
+}
+
+#email-input {
+  width: 200px;
+}
+
 #modal-background {
   position: absolute;
   top: 0;
@@ -79,6 +87,7 @@
 }
 
 .form-inline input {
+  width: 300px;
   border-radius: 0;
   border: #00539F solid 1px;
 }
@@ -96,7 +105,7 @@
   background-color: #00539F;
   min-height: 50px;
   font-size: 1.25em;
-  padding: 5px;
+  padding-top: 5px;
   border-radius: 5px;
 }
 
